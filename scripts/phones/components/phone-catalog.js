@@ -9,11 +9,11 @@ export default class PhoneCatalog extends Component {
     this._render();
 
 
-    this._on('click', '[data-element="phone-details-link"]', (event) => {
+    this._on('click', 'phone-details-link', (event) => {
       this._onPhoneDetailLinkClick(event);
     });
 
-    this._on('click', '[data-element="add-button"]', (event) => {
+    this._on('click', 'add-button', (event) => {
       this._onAddClick(event);
     });
   }

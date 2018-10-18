@@ -26,4 +26,16 @@ export default class Component {
 
     this._element.dispatchEvent(event);
   }
+
+  _on(eventName, selector, callback) {
+    this._element.addEventListener(eventName, (event) => {
+      let delegateTarget = event.target.closest(selector);
+
+      if (!delegateTarget) {
+        return;
+      }
+
+      callback(event);
+    });
+  }
 }

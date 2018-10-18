@@ -8,32 +8,24 @@ export default class PhoneCatalog extends Component {
 
     this._render();
 
-    this._element.addEventListener('click', (event) => {
-      this._onPhoneClick(event);
+
+    this._on('click', '[data-element="phone-details-link"]', (event) => {
+      this._onPhoneDetailLinkClick(event);
     });
 
-    this._element.addEventListener('click', (event) => {
+    this._on('click', '[data-element="add-button"]', (event) => {
       this._onAddClick(event);
     });
   }
 
-  _onPhoneClick (event) {
-    let phoneElement = event.target.closest('[data-element="phone"]');
 
-    if (!phoneElement) {
-      return;
-    }
+  _onPhoneDetailLinkClick (event) {
+    let phoneElement = event.target.closest('[data-element="phone"]');
 
     this.emit('phoneSelected', phoneElement.dataset.phoneId);
   }
 
   _onAddClick (event) {
-    let addButton = event.target.closest('[data-element="add-button"]');
-
-    if (!addButton) {
-      return;
-    }
-
     let phoneElement = event.target.closest('[data-element="phone"]');
 
     this.emit('add', phoneElement.dataset.phoneId);
@@ -48,7 +40,11 @@ export default class PhoneCatalog extends Component {
             data-element="phone"
             data-phone-id="${ phone.id }"
           >
-            <a href="#!/phones/${ phone.id }" class="thumb">
+            <a
+              href="#!/phones/${ phone.id }"
+              class="thumb"
+              data-element="phone-details-link"
+            >
               <img alt="${ phone.name }" src="${ phone.imageUrl }">
             </a>
   
@@ -58,7 +54,13 @@ export default class PhoneCatalog extends Component {
               </a>
             </div>
   
-            <a href="#!/phones/${ phone.id }">${ phone.name }</a>
+            <a
+              href="#!/phones/${ phone.id }"
+              data-element="phone-details-link"
+            >
+              ${ phone.name }
+            </a>
+            
             <p>${ phone.snippet }</p>
           </li>
         `).join('') }

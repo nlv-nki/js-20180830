@@ -30,7 +30,7 @@ export default class PhonesPage {
     });
 
     this._catalog.subscribe('add', (phoneId) => {
-      console.log(phoneId);
+      this._shoppingCart.addItem(phoneId);
     });
   }
 

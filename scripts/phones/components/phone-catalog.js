@@ -10,25 +10,16 @@ export default class PhoneCatalog extends Component {
 
 
     this._on('click', 'phone-details-link', (event) => {
-      this._onPhoneDetailLinkClick(event);
+      let phoneElement = event.target.closest('[data-element="phone"]');
+
+      this.emit('phoneSelected', phoneElement.dataset.phoneId);
     });
 
     this._on('click', 'add-button', (event) => {
-      this._onAddClick(event);
+      let phoneElement = event.target.closest('[data-element="phone"]');
+
+      this.emit('add', phoneElement.dataset.phoneId);
     });
-  }
-
-
-  _onPhoneDetailLinkClick (event) {
-    let phoneElement = event.target.closest('[data-element="phone"]');
-
-    this.emit('phoneSelected', phoneElement.dataset.phoneId);
-  }
-
-  _onAddClick (event) {
-    let phoneElement = event.target.closest('[data-element="phone"]');
-
-    this.emit('add', phoneElement.dataset.phoneId);
   }
 
   _render() {

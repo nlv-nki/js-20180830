@@ -11,20 +11,10 @@ export default class PhoneCatalog extends Component {
     this._element.addEventListener('click', (event) => {
       this._onPhoneClick(event);
     });
-  }
 
-  subscribe (eventName, callback) {
-    this._element.addEventListener(eventName, (event) => {
-      callback(event.detail);
+    this._element.addEventListener('click', (event) => {
+      this._onAddClick(event);
     });
-  }
-
-  emit (eventName, data) {
-    const event = new CustomEvent(eventName, {
-      detail: data
-    });
-
-    this._element.dispatchEvent(event);
   }
 
   _onPhoneClick (event) {
@@ -35,6 +25,18 @@ export default class PhoneCatalog extends Component {
     }
 
     this.emit('phoneSelected', phoneElement.dataset.phoneId);
+  }
+
+  _onAddClick (event) {
+    let addButton = event.target.closest('[data-element="add-button"]');
+
+    if (!addButton) {
+      return;
+    }
+
+    let phoneElement = event.target.closest('[data-element="phone"]');
+
+    this.emit('add', phoneElement.dataset.phoneId);
   }
 
   _render() {
@@ -51,7 +53,7 @@ export default class PhoneCatalog extends Component {
             </a>
   
             <div class="phones__btn-buy-wrapper">
-              <a class="btn btn-success">
+              <a class="btn btn-success" data-element="add-button">
                 Add
               </a>
             </div>

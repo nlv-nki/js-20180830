@@ -28,6 +28,10 @@ export default class PhonesPage {
       this._catalog.hide();
       this._viewer.show(phoneDetails);
     });
+
+    this._catalog.subscribe('add', (phoneId) => {
+      console.log(phoneId);
+    });
   }
 
   _initViewer() {

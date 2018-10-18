@@ -18,9 +18,13 @@ export default class PhoneViewer extends Component{
     this._element.innerHTML = `
       <img class="phone" src="${ images[0] }">
 
-      <button>Back</button>
-      <button>Add to basket</button>
-  
+      <button data-element="back-button">
+        Back
+      </button>
+      
+      <button data-element="add-button">
+        Add to basket
+      </button>
   
       <h1>${ name }</h1>
   

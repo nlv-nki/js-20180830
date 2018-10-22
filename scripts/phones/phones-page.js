@@ -19,7 +19,10 @@ export default class PhonesPage {
   _initCatalog () {
     this._catalog = new PhoneCatalog({
       element: this._element.querySelector('[data-component="phone-catalog"]'),
-      phones: PhoneService.getPhones(),
+    });
+
+    PhoneService.getPhones((phones) => {
+      this._catalog.show(phones);
     });
 
     this._catalog.subscribe('phoneSelected', (phoneId) => {
@@ -79,7 +82,7 @@ export default class PhonesPage {
       
           <!--Main content-->
           <div class="col-md-10">
-            <div data-component="phone-catalog"></div>
+            <div data-component="phone-catalog" class="js-hidden"></div>
             <div data-component="phone-viewer" class="js-hidden"></div>
           </div>
         </div>

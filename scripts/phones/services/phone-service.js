@@ -1,26 +1,17 @@
+import HttpService from '../../http-service.js'
 
 const PhoneService = {
   getPhones(callback) {
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('GET', '/api/phones.json', true);
-
-    xhr.send();
-
-    xhr.onload = () => {
-      if (xhr.status !== 200) {
-        console.error( xhr.status + ': ' + xhr.statusText );
-      } else {
-        let phones = JSON.parse(xhr.responseText);
-
-        callback(phones);
-      }
-    };
+    HttpService.sendRequest('/api/phones.json', {
+      successCallback: callback,
+    });
   },
 
-  getPhone(phoneId) {
-    return {};
-  }
+  getPhone(phoneId, callback) {
+    HttpService.sendRequest(`/api/phones/${phoneId}.json`, {
+      successCallback: callback,
+    });
+  },
 };
 
 export default PhoneService;

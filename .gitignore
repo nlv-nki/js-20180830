@@ -1,3 +1,8 @@
 .idea
+<<<<<<< HEAD
 .editorconfig
 .eslintrc.js
+=======
+node_modules
+package-lock.json
+>>>>>>> 059c7545539a13d2dfb641fcbe08f9583b6eca75

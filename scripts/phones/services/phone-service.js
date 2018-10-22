@@ -2,7 +2,7 @@ import HttpService from '../../http-service.js'
 
 const PhoneService = {
   getPhones(callback) {
-    HttpService.sendRequest('/api/phones.json', {
+    HttpService.sendRequest('phones.json', {
       successCallback: callback,
     });
   },

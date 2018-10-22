@@ -1,3 +1,5 @@
+const API_URL = 'https://mgrinko.github.io/js-20180830';
+// const API_URL = 'http://localhost:3000'
 
 const HttpService = {
   sendRequest(url, {
@@ -7,7 +9,7 @@ const HttpService = {
   }) {
     let xhr = new XMLHttpRequest();
 
-    xhr.open(method, url, true);
+    xhr.open(method, `${API_URL}/api/${url}`, true);
 
     xhr.send();
 

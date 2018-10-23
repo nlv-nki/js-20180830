@@ -8,7 +8,7 @@ const PhoneService = {
   },
 
   getPhone(phoneId, callback) {
-    HttpService.sendRequest(`/api/phones/${phoneId}.json`, {
+    HttpService.sendRequest(`phones/${phoneId}.json`, {
       successCallback: callback,
     });
   },

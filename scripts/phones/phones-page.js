@@ -66,7 +66,33 @@ export default class PhonesPage {
     this._filter = new PhonesFilter({
       element: this._element.querySelector('[data-component="phones-filter"]'),
     });
+
+    this._filter.subscribe('sort', () => {
+      console.log(event.detail, 1123)
+      let query = event.detail;
+
+       PhoneService.getPhones((phones) => {
+        console.log(phones)
+
+         if (query == 'name') {
+          phones.sort(function (item1,item2) {
+            if (item1.name < item2.name) return -1;
+            if ( item1.name > item2.name) return 1;
+          })
+         }
+
+         else if (query == 'age') {
+          phones.sort(function (item1,item2) {
+            if (item1.age > item2.age) return 1;
+            if (item1.age < item2.age) return -1;
+          })
+         }
+         this._catalog.show(phones)
+       })
+    });
   }
+
+
 
   _render() {
     this._element.innerHTML = `

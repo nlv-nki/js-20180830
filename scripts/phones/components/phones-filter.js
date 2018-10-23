@@ -4,6 +4,12 @@ export default class PhoneFilters extends Component {
   constructor({ element }) {
     super({ element });
 
+    this._on('change', 'sort-from', () => {
+      let s = document.querySelector('[data-element="sort-from"]');
+      let value = s.options[s.options.selectedIndex].value;
+      this.emit('sort', value );
+    });
+
     this._render();
   }
 
@@ -11,14 +17,14 @@ export default class PhoneFilters extends Component {
     this._element.innerHTML = `
       <p>
         Search:
-        <input
+        <input data-element="search-button"
           type="text"
         >
       </p>
 
       <p>
         Sort by:
-        <select>
+        <select data-element="sort-from">
           <option value="name">Alphabetical</option>
           <option value="age">Newest</option>
         </select>

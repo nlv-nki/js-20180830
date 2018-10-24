@@ -10,6 +10,14 @@ export default class PhoneFilters extends Component {
       this.emit('sort', value );
     });
 
+
+    this._on('input', 'search-field', () => {
+      let field = document.querySelector('[data-element="search-field"]');
+      let value = field.value;
+
+      this.emit('search', value );
+    });
+
     this._render();
   }
 
@@ -27,11 +35,22 @@ export default class PhoneFilters extends Component {
     }
   }
 
+  search(data, query) {
+
+    let searchphones = data.filter( phone => {
+      if (phone.name.includes(query)) {
+        return phone
+      }
+    });
+
+    return searchphones;
+  }
+
   _render() {
     this._element.innerHTML = `
       <p>
         Search:
-        <input data-element="search-button"
+        <input data-element="search-field"
           type="text"
         >
       </p>

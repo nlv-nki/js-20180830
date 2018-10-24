@@ -68,7 +68,6 @@ export default class PhonesPage {
     });
 
     this._filter.subscribe('sort', () => {
-      console.log(event.detail, 1123)
       let query = event.detail;
 
        PhoneService.getPhones((phones) => {
@@ -76,6 +75,15 @@ export default class PhonesPage {
          this._catalog.show(phones);
        })
     });
+
+    this._filter.subscribe('search', () => {
+      let query = event.detail;
+
+      PhoneService.getPhones((phones) => {
+        this._catalog.show(this._filter.search(phones, query));
+      })
+
+    })
   }
 
 

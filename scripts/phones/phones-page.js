@@ -72,22 +72,8 @@ export default class PhonesPage {
       let query = event.detail;
 
        PhoneService.getPhones((phones) => {
-        console.log(phones)
-
-         if (query == 'name') {
-          phones.sort(function (item1,item2) {
-            if (item1.name < item2.name) return -1;
-            if ( item1.name > item2.name) return 1;
-          })
-         }
-
-         else if (query == 'age') {
-          phones.sort(function (item1,item2) {
-            if (item1.age > item2.age) return 1;
-            if (item1.age < item2.age) return -1;
-          })
-         }
-         this._catalog.show(phones)
+         this._filter.sort(phones,query);
+         this._catalog.show(phones);
        })
     });
   }

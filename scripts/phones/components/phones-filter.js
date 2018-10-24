@@ -13,6 +13,23 @@ export default class PhoneFilters extends Component {
     this._render();
   }
 
+  sort(data, value) {
+
+    if (value === 'name') {
+      data.sort( (item1,item2) => {
+        if (item1.name < item2.name) return -1;
+        if ( item1.name > item2.name) return 1;
+      })
+    }
+
+    else if (value === 'age') {
+      data.sort( (item1,item2) => {
+        if (item1.age > item2.age) return 1;
+        if (item1.age < item2.age) return -1;
+      })
+    }
+  }
+
   _render() {
     this._element.innerHTML = `
       <p>

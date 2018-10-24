@@ -5,8 +5,8 @@ export default class PhoneFilters extends Component {
     super({ element });
 
     this._on('change', 'sort-from', () => {
-      let s = document.querySelector('[data-element="sort-from"]');
-      let value = s.options[s.options.selectedIndex].value;
+      let select = document.querySelector('[data-element="sort-from"]');
+      let value = select.value;
       this.emit('sort', value );
     });
 
@@ -23,10 +23,7 @@ export default class PhoneFilters extends Component {
     }
 
     else if (value === 'age') {
-      data.sort( (item1,item2) => {
-        if (item1.age > item2.age) return 1;
-        if (item1.age < item2.age) return -1;
-      })
+      data.sort( (item1,item2) =>  (item1 > item2) ? 1 : -1)
     }
   }
 

@@ -72,7 +72,7 @@ export default class PhonesPage {
       let query = event.detail;
 
        PhoneService.getPhones((phones) => {
-         this._filter.sort(phones,query);
+         this._filter.sort(phones, query);
          this._catalog.show(phones);
        })
     });

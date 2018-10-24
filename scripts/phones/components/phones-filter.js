@@ -38,7 +38,7 @@ export default class PhoneFilters extends Component {
   search(data, query) {
 
     let searchphones = data.filter( phone => {
-      if (phone.name.includes(query)) {
+      if (phone.name.toLowerCase().includes(query)) {
         return phone
       }
     });

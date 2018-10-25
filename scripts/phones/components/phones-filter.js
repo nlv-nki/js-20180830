@@ -13,9 +13,7 @@ export default class PhoneFilters extends Component {
 
     this._on('input', 'search-field', () => {
       let field = document.querySelector('[data-element="search-field"]');
-      let value = field.value;
-
-      this.emit('search', value );
+      this.emit('search', field.value );
     });
 
     this._render();

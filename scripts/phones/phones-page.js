@@ -23,7 +23,6 @@ export default class PhonesPage {
 
     this._loadPhonesFromServer();
 
-
     this._catalog.subscribe('phoneSelected', (phoneId) => {
       PhoneService.getPhone(phoneId)
       .then((phoneDetails) => {
@@ -36,17 +35,13 @@ export default class PhonesPage {
           this._catalog.subscribe('phoneSelectedConfirm', (phoneId) => {
             this._catalog.hide();
             this._viewer.show(phoneDetails);
-
           });
         }
-
       })
-
         .catch((error) => {
           console.warn(error);
         });
     });
-
 
     this._catalog.subscribe('add', (phoneId) => {
       this._shoppingCart.addItem(phoneId);

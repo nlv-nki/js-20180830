@@ -23,12 +23,26 @@ export default class PhonesPage {
 
     this._loadPhonesFromServer();
 
+
     this._catalog.subscribe('phoneSelected', (phoneId) => {
-      PhoneService.getPhone(phoneId, (phoneDetails) => {
+      PhoneService.getPhone(phoneId)
+      .then((phoneDetails) => {
+        return phoneDetails
+      }).
+      then((phoneDetails) => {
+        this._catalog.subscribe('phoneSelectedConfirm', (phoneId) => {
         this._catalog.hide();
         this._viewer.show(phoneDetails);
-      });
+
+        });
+        
+      })
+
+        .catch((error) => {
+          console.warn(error);
+        });
     });
+
 
     this._catalog.subscribe('add', (phoneId) => {
       this._shoppingCart.addItem(phoneId);
@@ -36,9 +50,10 @@ export default class PhonesPage {
   }
 
   _loadPhonesFromServer() {
-    PhoneService.getPhones((phones) => {
-      this._catalog.show(phones);
-    });
+    PhoneService.getPhones()
+      .then((phones) => {
+        this._catalog.show(phones);
+      });
   }
 
   _initViewer() {

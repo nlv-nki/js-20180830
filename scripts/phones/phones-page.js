@@ -27,15 +27,19 @@ export default class PhonesPage {
     this._catalog.subscribe('phoneSelected', (phoneId) => {
       PhoneService.getPhone(phoneId)
       .then((phoneDetails) => {
-        return phoneDetails
+        if (event) {
+          return phoneDetails
+        }
       }).
       then((phoneDetails) => {
-        this._catalog.subscribe('phoneSelectedConfirm', (phoneId) => {
-        this._catalog.hide();
-        this._viewer.show(phoneDetails);
+        if (phoneDetails) {
+          this._catalog.subscribe('phoneSelectedConfirm', (phoneId) => {
+            this._catalog.hide();
+            this._viewer.show(phoneDetails);
 
-        });
-        
+          });
+        }
+
       })
 
         .catch((error) => {

@@ -26,11 +26,12 @@ export default class PhonesPage {
     this._catalog.subscribe('phoneSelected', (phoneId) => {
       PhoneService.getPhone(phoneId)
       .then((phoneDetails) => {
+        console.log(event)
         if (event) {
           return phoneDetails
         }
-      }).
-      then((phoneDetails) => {
+      })
+      .then((phoneDetails) => {
         if (phoneDetails) {
           this._catalog.subscribe('phoneSelectedConfirm', (phoneId) => {
             this._catalog.hide();
@@ -38,9 +39,9 @@ export default class PhonesPage {
           });
         }
       })
-        .catch((error) => {
-          console.warn(error);
-        });
+      .catch((error) => {
+        console.warn(error);
+      });
     });
 
     this._catalog.subscribe('add', (phoneId) => {
